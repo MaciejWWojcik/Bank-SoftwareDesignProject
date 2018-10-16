@@ -21,19 +21,39 @@ public class DebitAccount extends Account {
 
     @Override
     public boolean charge(double chargeValue) {
-        // TODO handle charging
-        return false;
+        if(this.balance - chargeValue < 0) {
+            this.balance -= chargeValue;
+            if(this.balance < 0) {
+                double debitIncrease = Math.abs(this.balance);
+                debit += debitIncrease;
+                this.balance = 0;
+            }
+            return true;
+        } else if (debit + chargeValue > debitLevel) {
+            return false;
+        } else {
+            this.balance -= chargeValue;
+            return true;
+        }
     }
 
     @Override
     public boolean deposit(double depositValue) {
-        // TODO handle depositing
-        return false;
+        if(debit > 0) {
+            debit -= depositValue;
+            if(this.debit < 0) {
+                double accountIncome = Math.abs(this.debit);
+                this.balance += accountIncome;
+                this.debit = 0;
+            }
+        } else {
+            balance += depositValue;
+        }
+        return true;
     }
 
     @Override
     public double getBalance() {
-        // TODO balance - debit
-        return  -1;
+        return this.balance - this.debit;
     }
 }
