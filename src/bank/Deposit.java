@@ -1,6 +1,5 @@
 package bank;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -13,32 +12,30 @@ import java.util.concurrent.TimeUnit;
  */
 public class Deposit extends Account {
 
-    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
     private Date expirationDate;
     private Account ownerAccount;
 
-    public Deposit(Bank bank, List<Operation> availableOperations) {
+    public Deposit(Bank bank, List<Operation> availableOperations, double balance, Date expirationDate) {
         super(bank, availableOperations);
-        this.expirationDate = Calendar.getInstance().getTime();
-
+        this.expirationDate = expirationDate;
+        this.balance = balance;
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
         Runnable periodicTask = this::checkIfExpired;
         executor.scheduleAtFixedRate(periodicTask, 0, 1, TimeUnit.MINUTES);
     }
 
-    public void registerAccount(Account account){
+    public void registerAccount(Account account) {
         this.ownerAccount = account;
     }
 
     private void checkIfExpired() {
         Date currentDate = Calendar.getInstance().getTime();
-        if(currentDate.after(expirationDate)) {
+        if (currentDate.after(expirationDate)) {
             notifyAboutExpiration();
         }
     }
 
-    private void notifyAboutExpiration(){
+    private void notifyAboutExpiration() {
         this.ownerAccount.depositExpired(this);
     }
 

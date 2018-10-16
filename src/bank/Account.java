@@ -1,13 +1,16 @@
 package bank;
 
-import java.awt.*;
-import java.util.*;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by Maciej on 11.10.2018.
  */
-public class Account extends Product{
+public class Account extends Product {
+
 
     protected double balance;
     protected List<Deposit> deposits;
@@ -16,25 +19,54 @@ public class Account extends Product{
     protected InterestRate rate;
     protected List<Operation> availableOperations;
 
-    public Account(Bank bank, List<Operation> availableOperations){
+    public Account(Bank bank, List<Operation> availableOperations) {
         super(bank);
         this.availableOperations = availableOperations;
     }
 
-    public void depositExpired(Deposit deposit){
+    public void assignAccountInfo(AccountInfo info) {
+        if (this.info == null) {
+            this.info = info;
+        }
+    }
+
+    public void createDeposit(double moneyForDeposit, Date expirationDate) {
+        if(this.charge(moneyForDeposit)) {
+            Deposit deposit = new Deposit(this.bank, new ArrayList<>(), moneyForDeposit, expirationDate);
+            deposit.registerAccount(this);
+            deposits.add(deposit);
+        }
+    }
+
+    public void createLoan(double loanValue, double installment) {
+        if(this.deposit(loanValue)) {
+            Loan loan = new Loan(this.bank, new ArrayList<>(), loanValue, installment);
+            loan.registerAccount(this);
+            loans.add(loan);
+        }
+    }
+
+    public void depositExpired(Deposit deposit) {
         double moneyFromDeposit = deposit.withdrawAfterExpiration();
         balance += moneyFromDeposit;
         deposits.remove(deposit);
     }
 
-    public boolean charge(double chargeValue){
-        // TODO handle charging
+    public void loanFinished(Loan loan) {
+        loans.remove(loan);
+    }
+
+    public boolean charge(double chargeValue) {
+        if (balance - chargeValue > 0) {
+            balance -= chargeValue;
+            return true;
+        }
         return false;
     }
 
-    public boolean deposit(double depositValue){
-        // TODO handle depositing
-        return false;
+    public boolean deposit(double depositValue) {
+        this.balance += depositValue;
+        return true;
     }
 
     public double getBalance() {
