@@ -1,6 +1,6 @@
 package bank;
 
-import java.util.*
+import java.util.List;
 
 /**
  * Created by Maciej on 11.10.2018.
@@ -9,12 +9,12 @@ public class Report {
 
     private List<Product> products;
 
-    public Report(){
+    public Report() {
 
     }
 
-    public addProduct(Product product){
-        // TODO add product
+    public void addProduct(Product product) {
+        this.products.add(product);
     }
 
 }

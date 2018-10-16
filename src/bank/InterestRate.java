@@ -12,7 +12,6 @@ public class InterestRate {
     }
 
     public double calculate(){
-        // TODO calcualte interest rate;
-        return -1;
+        return Math.floor(Math.random() * 5);
     }
 }
