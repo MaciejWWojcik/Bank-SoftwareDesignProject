@@ -22,7 +22,9 @@ public class Account extends Product{
     }
 
     public void depositExpired(Deposit deposit){
-        // TODO handle expired deposit
+        double moneyFromDeposit = deposit.withdrawAfterExpiration();
+        balance += moneyFromDeposit;
+        deposits.remove(deposit);
     }
 
     public boolean charge(double chargeValue){

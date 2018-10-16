@@ -1,31 +1,48 @@
 package bank;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Maciej on 11.10.2018.
  */
 public class Deposit extends Account {
 
+    private static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-    private String expirationDate;
+    private Date expirationDate;
     private Account ownerAccount;
 
     public Deposit(Bank bank, List<Operation> availableOperations) {
         super(bank, availableOperations);
+        this.expirationDate = Calendar.getInstance().getTime();
 
-        // TODO invoke checkIfExpired periodicaly
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        Runnable periodicTask = this::checkIfExpired;
+        executor.scheduleAtFixedRate(periodicTask, 0, 1, TimeUnit.MINUTES);
     }
 
     public void registerAccount(Account account){
-        // TODO assign to ownerAccount
+        this.ownerAccount = account;
     }
 
-    private void checkIfExpired(){
-        // TODO invoke notifyParentAboutExpiration
+    private void checkIfExpired() {
+        Date currentDate = Calendar.getInstance().getTime();
+        if(currentDate.after(expirationDate)) {
+            notifyAboutExpiration();
+        }
     }
 
     private void notifyAboutExpiration(){
-        // TODO notify owner
+        this.ownerAccount.depositExpired(this);
+    }
+
+    public double withdrawAfterExpiration() {
+        return this.balance * this.rate.calculate();
     }
 }
