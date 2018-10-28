@@ -13,7 +13,7 @@ import java.util.concurrent.TimeUnit;
 public class Deposit extends Account {
 
     private Date expirationDate;
-    private Account ownerAccount;
+    protected Account ownerAccount;
 
     public Deposit(Bank bank, List<Operation> availableOperations, double balance, Date expirationDate) {
         super(bank, availableOperations);

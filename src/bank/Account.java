@@ -22,6 +22,8 @@ public class Account extends Product {
     public Account(Bank bank, List<Operation> availableOperations) {
         super(bank);
         this.availableOperations = availableOperations;
+        this.deposits = new ArrayList<>();
+        this.loans = new ArrayList<>();
     }
 
     public void assignAccountInfo(AccountInfo info) {
@@ -30,20 +32,24 @@ public class Account extends Product {
         }
     }
 
-    public void createDeposit(double moneyForDeposit, Date expirationDate) {
+    public boolean createDeposit(double moneyForDeposit, Date expirationDate) {
         if(this.charge(moneyForDeposit)) {
             Deposit deposit = new Deposit(this.bank, new ArrayList<>(), moneyForDeposit, expirationDate);
             deposit.registerAccount(this);
             deposits.add(deposit);
+            return true;
         }
+        return false;
     }
 
-    public void createLoan(double loanValue, double installment) {
+    public boolean createLoan(double loanValue, double installment) {
         if(this.deposit(loanValue)) {
             Loan loan = new Loan(this.bank, new ArrayList<>(), loanValue, installment);
             loan.registerAccount(this);
             loans.add(loan);
+            return true;
         }
+        return false;
     }
 
     public void depositExpired(Deposit deposit) {
