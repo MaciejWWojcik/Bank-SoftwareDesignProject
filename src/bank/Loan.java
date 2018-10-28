@@ -23,10 +23,13 @@ public class Loan extends Account {
         executor.scheduleAtFixedRate(periodicTask, 0, 1, TimeUnit.MINUTES);
     }
 
-    private void withdraw() {
-        ownerAccount.charge(installment);
-        loanValue -= installment;
-        checkIfExpired();
+    protected boolean withdraw() {
+        boolean result = ownerAccount.charge(installment);
+        if(result){
+            loanValue -= installment;
+            checkIfExpired();
+        }
+        return result;
     }
 
     public void registerAccount(Account account) {
