@@ -9,8 +9,8 @@ public class Bank {
 
     private int id;
     private String name;
-    private List<Product> products;
-    private List<OperationEntry> operationsHistory;
+    protected List<Product> products;
+    protected List<OperationEntry> operationsHistory;
     protected List<Transfer> transfers;
     protected List<Transfer> receivedTransfers;
 
