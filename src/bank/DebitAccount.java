@@ -8,7 +8,7 @@ import java.util.List;
 public class DebitAccount extends Account {
 
     private double debitLevel;
-    private double debit;
+    protected double debit;
 
 
     public DebitAccount(Bank bank, List<Operation> availableOperations) {
@@ -22,6 +22,9 @@ public class DebitAccount extends Account {
     @Override
     public boolean charge(double chargeValue) {
         if(this.balance - chargeValue < 0) {
+            if(Math.abs(this.balance - chargeValue) > debitLevel) {
+                return false;
+            }
             this.balance -= chargeValue;
             if(this.balance < 0) {
                 double debitIncrease = Math.abs(this.balance);
