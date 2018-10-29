@@ -11,7 +11,8 @@ public class Bank {
     private String name;
     private List<Product> products;
     private List<OperationEntry> operationsHistory;
-    private List<Transfer> transfers;
+    protected List<Transfer> transfers;
+    protected List<Transfer> receivedTransfers;
 
 
     public Bank(int id) {
@@ -19,6 +20,11 @@ public class Bank {
         this.products = new ArrayList<>();
         this.operationsHistory = new ArrayList<>();
         this.transfers = new ArrayList<>();
+        this.receivedTransfers = new ArrayList<>();
+    }
+
+    protected void addTransfer(Transfer transfer) {
+        transfers.add(transfer);
     }
 
     public void addOperation(OperationEntry operation) {
@@ -36,7 +42,7 @@ public class Bank {
     }
 
     public void receiveTransfer(Transfer incomingTransfer) {
-
+        this.receivedTransfers.add(incomingTransfer);
     }
 
     public int getId() {

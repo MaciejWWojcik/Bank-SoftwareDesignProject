@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class InterBankPaymentAgency {
 
-    private List<Bank> banks;
+    protected List<Bank> banks;
     private List<Transfer> transfers;
 
     public InterBankPaymentAgency(){
@@ -25,7 +25,7 @@ public class InterBankPaymentAgency {
         executor.scheduleAtFixedRate(periodicTask, 0, 1, TimeUnit.MINUTES);
     }
 
-    public void collectTransfers(){
+    public void  collectTransfers(){
         this.banks.forEach(bank -> transfers.addAll(bank.gatherTransfers()));
     }
 

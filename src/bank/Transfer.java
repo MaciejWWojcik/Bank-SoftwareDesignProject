@@ -15,4 +15,8 @@ public class Transfer {
     public int getReceiverBankId() {
         return receiverBankId;
     }
+
+    public int getSenderBankId() {
+        return senderBankId;
+    }
 }
