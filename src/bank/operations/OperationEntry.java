@@ -1,4 +1,4 @@
-package bank;
+package bank.operations;
 
 /**
  * Created by Maciej on 11.10.2018.

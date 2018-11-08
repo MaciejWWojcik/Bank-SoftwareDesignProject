@@ -1,5 +1,6 @@
 package bank;
 
+import bank.operations.OperationEntry;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;

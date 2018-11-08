@@ -1,13 +1,15 @@
-package bank;
+package bank.rates;
+
+import bank.Account;
 
 /**
  * Created by Maciej on 11.10.2018.
  */
-public class InterestRate {
+public class InitialInterestRate implements InterestRate{
 
     private Account account;
 
-    public InterestRate(Account account) {
+    public InitialInterestRate(Account account) {
         this.account = account;
     }
 

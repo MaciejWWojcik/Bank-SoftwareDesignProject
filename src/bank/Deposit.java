@@ -1,5 +1,7 @@
 package bank;
 
+import bank.operations.Operation;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +35,10 @@ public class Deposit extends Account {
         if (currentDate.after(expirationDate)) {
             notifyAboutExpiration();
         }
+    }
+
+    public Account getOwnerAccount() {
+        return ownerAccount;
     }
 
     private void notifyAboutExpiration() {

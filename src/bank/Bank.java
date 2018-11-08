@@ -1,5 +1,7 @@
 package bank;
 
+import bank.operations.OperationEntry;
+
 import java.util.*;
 
 /**

@@ -1,8 +1,9 @@
 package bank;
 
-import java.text.SimpleDateFormat;
+import bank.operations.Operation;
+import bank.rates.InterestRate;
+
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,6 @@ import java.util.List;
  * Created by Maciej on 11.10.2018.
  */
 public class Account extends Product {
-
 
     protected double balance;
     protected List<Deposit> deposits;
