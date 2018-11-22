@@ -29,7 +29,7 @@ public class BankTest {
 
     @Test
     public void shouldCorrectlyAddProduct() {
-        Account account = new Account(bank, new ArrayList<>());
+        Account account = new AccountFactory(bank, new ArrayList<>()).build();
         bank.addProduct(account);
 
         Assertions.assertEquals(1, bank.products.size());

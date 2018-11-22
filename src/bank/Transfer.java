@@ -4,19 +4,19 @@ package bank;
  * Created by Maciej on 11.10.2018.
  */
 public class Transfer {
-    private int senderBankId;
-    private int receiverBankId;
+    private int senderId;
+    private int receiverId;
 
-    public Transfer(int senderBankId, int receiverBankId) {
-        this.senderBankId = senderBankId;
-        this.receiverBankId = receiverBankId;
+    public Transfer(int senderId, int receiverId) {
+        this.senderId = senderId;
+        this.receiverId = receiverId;
     }
 
-    public int getReceiverBankId() {
-        return receiverBankId;
+    public int getSenderId() {
+        return senderId;
     }
 
-    public int getSenderBankId() {
-        return senderBankId;
+    public int getReceiverId() {
+        return receiverId;
     }
 }

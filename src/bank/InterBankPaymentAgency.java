@@ -31,7 +31,9 @@ public class InterBankPaymentAgency {
 
     public void sendTransfers(){
         this.transfers.forEach(transfer -> {
-            Optional<Bank> receiverBank = banks.stream().filter(bank -> bank.getId() == transfer.getReceiverBankId()).findFirst();
+            Optional<Bank> receiverBank = banks.stream()
+                    .filter(bank -> bank.hasAccount(Integer.toString(transfer.getReceiverId())))
+                    .findFirst();
             receiverBank.ifPresent(bank -> bank.receiveTransfer(transfer));
         });
         this.transfers.clear();

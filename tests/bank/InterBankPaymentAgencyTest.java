@@ -39,12 +39,12 @@ public class InterBankPaymentAgencyTest {
         paymentAgency.sendTransfers();
         Assertions.assertEquals(1, bank1.receivedTransfers.size());
         Transfer bank1Transfer = bank1.receivedTransfers.get(0);
-        Assertions.assertEquals(1, bank1Transfer.getReceiverBankId());
-        Assertions.assertEquals(2, bank1Transfer.getSenderBankId());
+        Assertions.assertEquals(1, bank1Transfer.getReceiverId());
+        Assertions.assertEquals(2, bank1Transfer.getSenderId());
         Assertions.assertEquals(1, bank2.receivedTransfers.size());
         Transfer bank2Transfer = bank2.receivedTransfers.get(0);
-        Assertions.assertEquals(2, bank2Transfer.getReceiverBankId());
-        Assertions.assertEquals(1, bank2Transfer.getSenderBankId());
+        Assertions.assertEquals(2, bank2Transfer.getReceiverId());
+        Assertions.assertEquals(1, bank2Transfer.getSenderId());
     }
 
 }

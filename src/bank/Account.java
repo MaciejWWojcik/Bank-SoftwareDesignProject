@@ -33,7 +33,7 @@ public class Account extends Product {
     }
 
     public boolean createDeposit(double moneyForDeposit, Date expirationDate) {
-        if(this.charge(moneyForDeposit)) {
+        if (this.charge(moneyForDeposit)) {
             Deposit deposit = new Deposit(this.bank, new ArrayList<>(), moneyForDeposit, expirationDate);
             deposit.registerAccount(this);
             deposits.add(deposit);
@@ -43,7 +43,7 @@ public class Account extends Product {
     }
 
     public boolean createLoan(double loanValue, double installment) {
-        if(this.deposit(loanValue)) {
+        if (this.deposit(loanValue)) {
             Loan loan = new Loan(this.bank, new ArrayList<>(), loanValue, installment);
             loan.registerAccount(this);
             loans.add(loan);
@@ -78,4 +78,6 @@ public class Account extends Product {
     public double getBalance() {
         return balance;
     }
+
+
 }

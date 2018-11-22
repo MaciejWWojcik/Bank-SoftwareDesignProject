@@ -50,4 +50,10 @@ public class Bank {
     public int getId() {
         return id;
     }
+
+    public boolean hasAccount(String id) {
+        return products.stream()
+                .filter(product -> product instanceof Account)
+                .anyMatch(product -> Objects.equals(product.getId(), id));
+    }
 }
