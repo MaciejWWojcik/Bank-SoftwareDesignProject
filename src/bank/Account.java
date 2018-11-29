@@ -70,6 +70,10 @@ public class Account extends Product {
         return false;
     }
 
+    public void chargeAll() {
+        this.balance = 0;
+    }
+
     public boolean deposit(double depositValue) {
         this.balance += depositValue;
         return true;

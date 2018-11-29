@@ -5,15 +5,15 @@ import org.junit.jupiter.api.*;
 import java.util.ArrayList;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-public class DebitAccountTest {
+public class DebitTest {
 
     Bank bank;
-    DebitAccount account;
+    Debit account;
 
     @BeforeAll
     public void init() {
         bank = new Bank(1);
-        account = new DebitAccount(bank, new ArrayList<>());
+        account = new Debit(bank, new ArrayList<>());
         account.setDebitLevel(20);
     }
 
