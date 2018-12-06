@@ -2,6 +2,7 @@ package bank;
 
 import org.junit.jupiter.api.*;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -18,9 +19,10 @@ public class DepositTest {
     @BeforeEach
     public void initAccount(){
         Bank bank = new Bank(1);
-        Date today = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, -1);
         owner = new Account(bank,new ArrayList<>());
-        deposit = new Deposit(bank, new ArrayList<>(), 1000, today);
+        deposit = new Deposit(bank, new ArrayList<>(), 1000, calendar.getTime());
         deposit.registerAccount(owner);
     }
 
@@ -30,7 +32,8 @@ public class DepositTest {
     }
 
     @Test
-    public void accountBalanceShouldIncreaseAfterExpiration(){
+    public void accountBalanceShouldIncreaseAfterExpiration() throws InterruptedException {
+        deposit.checkIfExpired();
         Assertions.assertTrue(owner.balance > 0);
     }
 

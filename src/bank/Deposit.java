@@ -1,6 +1,7 @@
 package bank;
 
 import bank.operations.Operation;
+import bank.rates.InitialInterestRate;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -23,14 +24,15 @@ public class Deposit extends Account {
         this.balance = balance;
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
         Runnable periodicTask = this::checkIfExpired;
-        executor.scheduleAtFixedRate(periodicTask, 0, 1, TimeUnit.MINUTES);
+        executor.scheduleAtFixedRate(periodicTask, 0, 1, TimeUnit.SECONDS);
+        this.rate = new InitialInterestRate(this);
     }
 
     public void registerAccount(Account account) {
         this.ownerAccount = account;
     }
 
-    private void checkIfExpired() {
+    protected void checkIfExpired() {
         Date currentDate = Calendar.getInstance().getTime();
         if (currentDate.after(expirationDate)) {
             notifyAboutExpiration();
