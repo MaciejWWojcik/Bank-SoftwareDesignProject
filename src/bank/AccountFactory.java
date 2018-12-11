@@ -16,7 +16,7 @@ public class AccountFactory {
     }
 
     public Account build() {
-        this.account.setId(Integer.toString(nextAccountId++));
+        this.account.setId(nextAccountId++);
         return this.account;
     }
 

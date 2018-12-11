@@ -17,6 +17,9 @@ public class InterBankPaymentAgency {
     public InterBankPaymentAgency(){
         this.banks = new ArrayList<>();
         this.transfers = new ArrayList<>();
+    }
+
+    public void enablePeriodicTransferFlow() {
         ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
         Runnable periodicTask = () -> {
             collectTransfers();
@@ -32,7 +35,7 @@ public class InterBankPaymentAgency {
     public void sendTransfers(){
         this.transfers.forEach(transfer -> {
             Optional<Bank> receiverBank = banks.stream()
-                    .filter(bank -> bank.hasAccount(Integer.toString(transfer.getReceiverId())))
+                    .filter(bank -> bank.hasAccount((transfer.getReceiverId())))
                     .findFirst();
             receiverBank.ifPresent(bank -> bank.receiveTransfer(transfer));
         });

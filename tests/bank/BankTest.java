@@ -38,7 +38,7 @@ public class BankTest {
 
     @Test
     public void shouldCorrectlyAddOperation() {
-        OperationEntry operationEntry = new OperationEntry("income", "1", "2018-10-10", "Short description");
+        OperationEntry operationEntry = new OperationEntry("income", 1, "2018-10-10", "Short description");
         bank.addOperation(operationEntry);
 
         Assertions.assertEquals(1, bank.operationsHistory.size());

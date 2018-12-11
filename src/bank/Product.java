@@ -11,20 +11,20 @@ public class Product {
 
     protected List<OperationEntry> operationsHistory;
     protected Bank bank;
-    protected String id;
+    protected int id;
 
 
     public Product(Bank bank){
-        this.id = "ID" + Math.random();
+        this.id = Math.toIntExact(Math.round(Math.random() * 100));
         this.bank = bank;
     }
 
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 }
